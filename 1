@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+int main() {
+	int m, i, j = 0, n, f = 0, min, max, J1, J2;
+	cin >> m;
+	cin >> n;
+	if ((m <= 0) || (n <= 0))
+		cout << "Данные введены некорректно";
+	else {
+		min = INT_MAX;
+		max = -1 * INT_MAX;
+		int** v = (int**)malloc(m * sizeof(int*));
+		for (int i = 0; i < m; i++)
+			v[i] = (int*)malloc(n * sizeof(int));
+		for (i = 0; i < m; i++)
+			for (j = 0; j < n; j++)
+				cin >> v[i][j];
+		i = 0;
+		while (i < m) {
+			for (j = 0; j < n; j++) {
+				if (v[i][j] > max) {
+					max = v[i][j];
+					J1 = j;
+				}
+				if (v[i][j] < min) {
+					min = v[i][j];
+					J2 = j;
+				}
+			}
+			swap(v[i][J1], v[i][J2]);
+			min = INT_MAX;
+			max = -1 * INT_MAX;
+			i++;
+		}
+		for (i = 0; i < m; i++) {
+			for (j = 0; j < n; j++)
+				cout << v[i][j] << " ";
+			cout << endl;
+		}
+		delete[] v;
+	}
+	return 0;
+}
